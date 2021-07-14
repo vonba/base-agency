@@ -25,23 +25,22 @@ const createLocalePage = (page, createPage) => {
   });
 };
 
-// Page creation hook (use localization wrapper here)
+// Create pages from /pages folder
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
   deletePage(page);
   createLocalePage(page, createPage);
 };
 
-async function createGeneralPages({ graphql, actions }) {
-  // 1. get a template for this page
-  const pageTemplate = path.resolve('./src/templates/Page.js');
-
-  // 2. query all pages
+// Create custom pages from pages stored in Sanity
+async function createCustomPages({ graphql, actions }) {
+  // query all pages
   const { data } = await graphql(`
     query {
-      pages: allSanityGeneralPage {
+      pages: allSanityCustomPage {
         nodes {
           id
+          componentName
           slug {
             _type
             en
@@ -54,7 +53,12 @@ async function createGeneralPages({ graphql, actions }) {
 
   // 3. Create each page
   data.pages.nodes.forEach((page) => {
-    console.log(`creating dynamic page for ${page.slug.en}`);
+    // get dynamic template
+    const pageTemplate = path.resolve(`./src/templates/${page.componentName}`);
+
+    console.log(
+      `creating dynamic page for ${page.slug.en} using component ${page.componentName}`
+    );
 
     languages.forEach((lang) => {
       const urlPrefix = lang === defaultLanguage ? '' : `/${lang}`;
@@ -70,55 +74,7 @@ async function createGeneralPages({ graphql, actions }) {
           locale: lang,
           linkPrefix,
           imageMaxWidth,
-          pageType: 'general',
-        },
-      });
-    });
-  });
-}
-
-async function createPropertyPages({ graphql, actions }) {
-  // 1. get a template for this page
-  const pageTemplate = path.resolve('./src/templates/PropertyPage.js');
-
-  // 2. query all pages
-  const { data } = await graphql(`
-    query {
-      pages: allSanityPropertyType {
-        nodes {
-          id
-          slug {
-            _type
-            en
-            es
-          }
-        }
-      }
-    }
-  `);
-
-  // 3. Create each page
-  data.pages.nodes.forEach((page) => {
-    console.log(`creating property page for ${page.slug.en}`);
-
-    const { context, ...rest } = page;
-
-    languages.forEach((lang) => {
-      const urlPrefix = lang === defaultLanguage ? '' : `/${lang}`;
-      const linkPrefix = lang === defaultLanguage ? '' : lang;
-
-      actions.createPage({
-        path: `${urlPrefix}/${page.slug[lang]}`,
-        // The template to use when creating this page
-        component: pageTemplate,
-        context: {
-          ...context,
-          pageId: page.id,
-          slug: page.slug[lang],
-          locale: lang,
-          linkPrefix,
-          imageMaxWidth,
-          pageType: 'property',
+          pageType: 'custom',
         },
       });
     });
@@ -128,8 +84,7 @@ async function createPropertyPages({ graphql, actions }) {
 export async function createPages(params) {
   // Create pages dynamically (and concurrently! speeds up build)
   await Promise.all([
-    // General pages
-    createGeneralPages(params),
-    createPropertyPages(params),
+    // Custom pages
+    createCustomPages(params),
   ]);
 }
