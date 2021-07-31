@@ -10,7 +10,7 @@ export default function LocaleLink({
   onNavigate,
   className,
 }) {
-  const [locale, setLocale] = useContext(LocaleContext);
+  const [locale] = useContext(LocaleContext);
   const isAnchorLink = to.includes('#');
   let slug = to;
   if (slugs && Object.keys(slugs).includes(locale)) {

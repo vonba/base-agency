@@ -6,9 +6,16 @@ import 'normalize.css'; // imported as dependency, see package.json
 import GlobalStyles from '../styles/GlobalStyles';
 import Typography from '../styles/Typography';
 import { LocaleProvider } from './LocaleContext';
+import { breakpoints } from '../styles/Variables';
 
 const ContentStyles = styled.main`
-  padding-top: var(--navHeight);
+  padding: calc(var(--navHeight) + 1rem) 2rem 2rem 2rem;
+  /* padding: calc(var(--navHeight) + 1rem) var(--col1) 2rem var(--col1); */
+
+  @media (min-width: ${breakpoints.breakLg}) {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
 `;
 
 export default function Layout(props) {
@@ -18,7 +25,7 @@ export default function Layout(props) {
       <LocaleProvider pageContext={pageContext}>
         <GlobalStyles />
         <Typography />
-        <Nav />
+        <Nav className={`${pageContext.slug}`}/>
         <ContentStyles className={`${pageContext.slug || ''}`}>
           {children}
         </ContentStyles>

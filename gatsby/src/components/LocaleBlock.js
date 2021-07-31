@@ -1,13 +1,13 @@
 import React from 'react';
 import BlockContent from '@sanity/block-content-to-react';
-import Img from 'gatsby-image';
-import { getFluidGatsbyImage } from 'gatsby-source-sanity';
+// import Img from 'gatsby-image';
+// import { getFluidGatsbyImage } from 'gatsby-source-sanity';
 
 // Sanity client config
-const sanityConfig = {
-  projectId: process.env.GATSBY_SANITY_PROJECT_ID,
-  dataset: process.env.GATSBY_SANITY_DATASET,
-};
+// const sanityConfig = {
+//   projectId: process.env.GATSBY_SANITY_PROJECT_ID,
+//   dataset: process.env.GATSBY_SANITY_DATASET,
+// };
 
 // Create Sanity image url builder
 // https://www.sanity.io/docs/image-url
@@ -34,14 +34,15 @@ const serializers = {
     },
   },
   types: {
-    imageWithAlt: ({ node }) => {
-      const fluidProps = getFluidGatsbyImage(
-        node.asset._ref,
-        { maxWidth: 2400 }, // TODO: get from config
-        sanityConfig
-      );
-      return <Img key={node._key} fluid={fluidProps} alt={node.alt} />;
-    },
+    // TODO: implement images with StyImage component
+    // imageWithAlt: ({ node }) => {
+    //   const fluidProps = getFluidGatsbyImage(
+    //     node.asset._ref,
+    //     { maxWidth: 2400 },
+    //     sanityConfig
+    //   );
+    //   return <Img key={node._key} fluid={fluidProps} alt={node.alt} />;
+    // },
   },
 };
 
@@ -49,6 +50,9 @@ export default function LocaleBlock({ content, className }) {
   if (!content) {
     return <></>;
   }
+
+  console.log({content})
+
   // Blocks currently arrive without the markDefs field, so this needs to be added
   const fixedContent = content.map((block) => ({ ...block, markDefs: [] }));
   // Check for class name

@@ -6,7 +6,8 @@ module.exports = {
   // npm run build -- --prefix-paths
   pathPrefix: '/project/gatsby/public/',
   siteMetadata: {
-    title: "Balthazaurus",
+    title: "Base",
+    siteUrl: "https://baseagency.mx",
   },
   plugins: [
     {
@@ -23,6 +24,13 @@ module.exports = {
     },
     "gatsby-plugin-styled-components",
     "gatsby-plugin-image",
+    {
+      resolve: "gatsby-plugin-sanity-image",
+      options: {
+        projectId: "9pxhc8ad",
+        dataset: "production",
+      },
+    },
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {

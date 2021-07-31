@@ -2,6 +2,17 @@ export default {
   name: 'project',
   title: 'Projects',
   type: 'document',
+  preview: {
+    select: {
+      title: 'title',
+    },
+    prepare: (fields) => {
+      const { title } = fields;
+      return {
+        title: title?.en ? title.en : '(Untitled)',
+      };
+    },
+  },
   fields: [
     {
       title: 'Title',
@@ -9,13 +20,14 @@ export default {
       type: 'localeString',
     },
     {
-      title: 'Slug',
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      title: 'Location/subheader',
+      name: 'location',
+      type: 'localeString',
+    },
+    {
+      title: 'Details',
+      name: 'body',
+      type: 'localeBlock',
     },
     {
       title: 'Main image',
@@ -31,26 +43,10 @@ export default {
       type: 'gallery',
     },
     {
-      title: 'Categories',
-      name: 'categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
-    },
-    {
-      title: 'Body',
-      name: 'body',
-      type: 'localeBlock',
+      name: "order",
+      title: "Order",
+      type: "number",
+      hidden: true,
     },
   ],
-  preview: {
-    select: {
-      title: 'title',
-    },
-    prepare: (fields) => {
-      const { title } = fields;
-      return {
-        title: title.en,
-      };
-    },
-  },
 }

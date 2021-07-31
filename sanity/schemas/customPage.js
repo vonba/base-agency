@@ -21,11 +21,6 @@ export default {
       title: 'META DATA',
       options: { collapsible: true, collapsed: true },
     },
-    {
-      name: 'hero',
-      title: 'HERO',
-      options: { collapsible: true, collapsed: true },
-    },
   ],
   fields: [
     {
@@ -34,7 +29,12 @@ export default {
       type: 'localeString',
     },
     {
-      title: 'COMPONENT',
+      title: 'MAIN BODY',
+      name: 'body',
+      type: 'localeBlock',
+    },
+    {
+      title: 'TEMPLATE',
       description: "E.g. 'myCustomTemplate.js'",
       name: 'componentName',
       type: 'string',

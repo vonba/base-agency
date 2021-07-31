@@ -70,7 +70,7 @@ const blockFields = supportedLanguages.map((lang) => ({
                 name: 'reference',
                 type: 'reference',
                 to: [
-                  { type: 'generalPage' },
+                  { type: 'customPage' },
                   // other types you may want to link to
                 ],
               },

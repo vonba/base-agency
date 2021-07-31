@@ -1,7 +1,6 @@
-import { format } from 'date-fns';
-import { en, es } from 'date-fns/locale';
+import { enUS, es } from 'date-fns/locale';
 
-const formattingLocales = { en, es };
+const formattingLocales = { en: enUS, es };
 
 export const getFormattingLocale = (languageCode) =>
   formattingLocales[languageCode];

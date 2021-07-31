@@ -57,7 +57,7 @@ async function createCustomPages({ graphql, actions }) {
     const pageTemplate = path.resolve(`./src/templates/${page.componentName}`);
 
     console.log(
-      `creating dynamic page for ${page.slug.en} using component ${page.componentName}`
+      `creating dynamic page for ${page.slug.en || '/'} using component ${page.componentName}`
     );
 
     languages.forEach((lang) => {
@@ -65,7 +65,9 @@ async function createCustomPages({ graphql, actions }) {
       const linkPrefix = lang === defaultLanguage ? '' : lang;
 
       actions.createPage({
-        path: `${urlPrefix}/${page.slug[lang]}`,
+        path: page.slug[lang] 
+          ? `${urlPrefix}/${page.slug[lang]}` 
+          : urlPrefix ? urlPrefix : '/',
         // The template to use when creating this page
         component: pageTemplate,
         context: {

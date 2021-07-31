@@ -1,7 +1,10 @@
-import React from "react"
+import React, { useContext } from "react"
+import LocaleContext from "../components/LocaleContext"
+import { tr } from "../utils/translations"
 
 const NotFoundPage = () => {
-  return <p>This is the 404 page</p>
+  const [locale] = useContext(LocaleContext);
+  return <p>{tr('messages', 'errorNotFound', locale)}</p>
 }
 
 export default NotFoundPage

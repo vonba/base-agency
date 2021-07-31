@@ -9,13 +9,19 @@ export default {
       type: 'localeString',
     },
     {
-      title: 'Slug',
-      name: 'slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      title: 'Location',
+      name: 'location',
+      type: 'localeString',
+    },
+    {
+      title: 'Date',
+      name: 'date',
+      type: 'datetime',
+    },
+    {
+      title: 'Details',
+      name: 'body',
+      type: 'localeBlock',
     },
     {
       title: 'Main image',
@@ -31,20 +37,10 @@ export default {
       type: 'gallery',
     },
     {
-      title: 'Categories',
-      name: 'categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
-    },
-    {
-      title: 'Date',
-      name: 'date',
-      type: 'datetime',
-    },
-    {
-      title: 'Body',
-      name: 'body',
-      type: 'localeBlock',
+      name: "order",
+      title: "Order",
+      type: "number",
+      hidden: true,
     },
   ],
   preview: {
