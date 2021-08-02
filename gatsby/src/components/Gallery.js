@@ -15,6 +15,19 @@ const GalleryStyles = styled.div`
 
   .galleryImage {
     cursor: pointer;
+
+    img {
+      // TODO: possible to instead of completely hiding preview image
+      // instead do some positioning to force browser to lazy load the real image?
+      /* &[data-loading] {
+        position: relative;
+        bottom: -20px;
+      } */
+
+      &:not([loading]) {
+        display: none;
+      }
+    }
   }
 
   .toggleExpanded {
@@ -168,6 +181,7 @@ export default function Gallery({
     <GalleryStyles className={expanded ? `${className} expanded` : className}>
       <Slider {...settings}>
         {images.map((image,) => {
+          console.log(image)
           return <StyImage 
             key={image.asset._id}
             className="galleryImage"
