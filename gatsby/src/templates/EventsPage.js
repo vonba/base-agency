@@ -187,7 +187,7 @@ const EventsPage = ({data}) => {
     <div className="socials">
       {tr('cta', 'connectWithUs', locale)}<br />
       <span className="resource">
-        ig <a href="https://instagram.com/basemx" target="_blank" rel="noreferrer">@basemx</a> 
+        ig <a href="https://instagram.com/baseagency.mx" target="_blank" rel="noreferrer">@baseagency.mx</a> 
       </span>
       <span className="resource">
         email <a href="mailto:info@baseagency.mx">info@baseagency.mx</a>

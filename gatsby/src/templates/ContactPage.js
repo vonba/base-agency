@@ -71,7 +71,7 @@ const ContactPage = ({data}) => {
         
         <p>
           instagram<br />
-          <a href="https://instagram.com/basemx" target="_blank" rel="noreferrer">
+          <a href="https://instagram.com/baseagency.mx" target="_blank" rel="noreferrer">
             @basemx
           </a>
         </p>

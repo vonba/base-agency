@@ -8,6 +8,7 @@ import logo1 from '../images/base-agency-logo-1.png';
 import logo2 from '../images/base-agency-logo-2.png';
 import logo3 from '../images/base-agency-logo-3.png';
 import { breakpoints } from '../styles/Variables';
+import SetLocaleLink from './SetLocaleLink';
 // import menuIcon from '../images/Icon_Menu_White.svg';
 
 const NavStyles = styled.nav`
@@ -151,6 +152,7 @@ const NavStyles = styled.nav`
     }
   }
 
+  // Menu open/close
   .toggleExpanded {
     background: transparent;
     width: 2rem;
@@ -218,6 +220,7 @@ const NavStyles = styled.nav`
     }
   }
 
+  // Contact info
   .contactInfo {
     display: none; // Show only when expanded
     text-align: center;
@@ -227,6 +230,12 @@ const NavStyles = styled.nav`
     width: 100%;
     font-size: var(--fsSmall);
     font-weight: 300;
+
+    .languages {
+      .active {
+        display: none;
+      }
+    }
 
     @media (min-width: ${breakpoints.breakMd}) {
       bottom: 2rem;
@@ -238,7 +247,7 @@ const NavStyles = styled.nav`
 `;
 
 const Nav = ({className}) => {
-  const [locale] = useContext(LocaleContext);
+  const [locale, setLocale] = useContext(LocaleContext);
   const [expanded, setExpanded] = useState(false);
 
   const onNavigate = () => {
@@ -276,7 +285,12 @@ const Nav = ({className}) => {
 
     <p className="contactInfo">
       Jalapa 30B, Roma Norte, Cuauhtémoc<br />
-      Mexico City
+      Mexico City<br />
+      <br />
+      <span className="languages">
+        <SetLocaleLink to="">English</SetLocaleLink>
+        <SetLocaleLink to="es">Español</SetLocaleLink>
+      </span>
     </p>
 
     <button
