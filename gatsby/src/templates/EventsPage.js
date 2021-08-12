@@ -177,7 +177,7 @@ const EventsPage = ({data}) => {
     <div className="linkWrapper">
       <LocaleLink
         to="/past-projects"
-        slugs={{es: 'eventos'}}
+        slugs={{es: 'proyectos-pasados'}}
         className="cta"
       >
         {tr('cta', 'seePastProjects', locale)}
