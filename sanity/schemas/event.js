@@ -15,8 +15,14 @@ export default {
     },
     {
       title: 'Date',
+      description: 'Date and time when this event should disappear from listing',
       name: 'date',
       type: 'datetime',
+    },
+    {
+      title: 'Time',
+      name: 'time',
+      type: 'string',
     },
     {
       title: 'Details',
