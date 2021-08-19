@@ -58,6 +58,7 @@ const EventsPageStyles = styled.div`
   @media (min-width: ${breakpoints.breakMd}) {
     .intro {
       text-align: left;
+      font-size: var(--fsTitle2);
     }
 
     .eventsWrapper {
@@ -66,7 +67,7 @@ const EventsPageStyles = styled.div`
       
       .event {
         .image {
-          height: calc((100vw - 6rem) / 2 / 2);
+          height: calc((100vw - 6rem) / 2);
         }
       }
     }
@@ -222,7 +223,7 @@ export const query = graphql`
       }
     }
     
-    events: allSanityEvent {
+    events: allSanityEvent(sort: { fields: date }) {
       nodes {
         _id
         title {
@@ -232,6 +233,7 @@ export const query = graphql`
           ...LocaleStringFields
         }
         date
+        time
         body {
           ...LocaleBlockFields
         }

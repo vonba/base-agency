@@ -3,6 +3,7 @@ import BlockContent from '@sanity/block-content-to-react'
 import styled from 'styled-components';
 import StyImage from './StyImage.js';
 import formatDate from '../utils/formatDate.js';
+import { breakpoints } from '../styles/Variables.js';
 
 const EventStyles = styled.article`
   margin-bottom: 4rem;
@@ -33,9 +34,44 @@ const EventStyles = styled.article`
   p {
     font-weight: 300;
   }
+
+  header {
+    @media (min-width: ${breakpoints.breakLg}) {
+      padding-right: 1rem;
+    }
+  }
 `;
 
+const serializers = {
+  types: {
+    code: (props) => (
+      <pre data-language={props.node.language}>
+        <code>{props.node.code}</code>
+      </pre>
+    ),
+  },
+  marks: {
+    internalLink: ({mark, children}) => {
+      const {slug = {}} = mark
+      const href = `/${slug.current}`
+      return <a href={href}>{children}</a>
+    },
+    link: ({mark, children}) => {
+      // Read https://css-tricks.com/use-target_blank/
+      const { blank, href } = mark
+      return blank ?
+        <a href={href} target="_blank" rel="noopener">{children}</a>
+        : <a href={href}>{children}</a>
+    }
+  }
+}
+
 export default function Event({event, className}) {
+
+  // Blocks currently arrive without the markDefs field, so this needs to be added
+  const fixedEventBody = event.body.map((block) => ({ ...block, markDefs: [] }));
+  console.log(event.body)
+  console.log(fixedEventBody)
 
   return <EventStyles className={className}>
     <header>
@@ -46,7 +82,8 @@ export default function Event({event, className}) {
         </div>
       </h2>
       <div className="location">
-        {event.location}
+        {event.location}<br />
+        {event.time}
       </div>
     </header>
 
@@ -59,7 +96,7 @@ export default function Event({event, className}) {
     />}
     
     <div className="content">
-      <BlockContent blocks={event.body} />
+      <BlockContent blocks={fixedEventBody} serializers={serializers} />
     </div>
   </EventStyles>
 }
