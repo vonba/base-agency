@@ -121,6 +121,7 @@ const NavStyles = styled.nav`
     width: var(--col8);
     height: 3rem;
     transition: opacity 0.5s;
+    border: none;
     // TODO: add drop shadow - need to change graphic to svg
     // https://css-tricks.com/adding-shadows-to-svg-icons-with-css-and-svg-filters/
 
@@ -255,11 +256,9 @@ const Nav = ({className}) => {
   }
 
   return <NavStyles className={`${className} ${expanded ? 'expanded' : ''}`}>
-    <Link to="/" style={{border: 'none'}}>
-      <div className="logo">
-        Base Agency
-      </div>
-    </Link>
+    <LocaleLink to="/" onNavigate={onNavigate} className="logo">
+      Base Agency
+    </LocaleLink>
     <ul>
       <li className="whatsOn">
         <LocaleLink to="/" onNavigate={onNavigate}>
