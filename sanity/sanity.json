@@ -1,18 +1,19 @@
 {
   "root": true,
-  "project": {
-    "name": "Site name"
-  },
   "api": {
-    "projectId": "projectId",
+    "projectId": "9pxhc8ad",
     "dataset": "production"
+  },
+  "project": {
+    "name": "base"
   },
   "plugins": [
     "@sanity/base",
     "@sanity/components",
     "@sanity/default-layout",
     "@sanity/default-login",
-    "@sanity/desk-tool"
+    "@sanity/desk-tool",
+    "@sanity/google-maps-input"
   ],
   "env": {
     "development": {
@@ -25,6 +26,10 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./sidebar.js"
     }
   ]
 }
