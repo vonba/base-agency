@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import LocaleContext from '../components/LocaleContext.js';
 import localize from'../components/localize.jsx';
@@ -154,10 +154,24 @@ const EventsPageStyles = styled.div`
 `;
 
 const EventsPage = ({data}) => {
-  const [locale] = useContext(LocaleContext);
-  const { page, events } = data;
-  if (!page) return null;
+  const [locale] = useContext(LocaleContext)
+  const { page, events } = data
+  const [futureEvents, setFutureEvents] = useState([])
 
+  // Filter out past events 
+  // (do as useEffect since page is prebuilt, this allows us to get current client time)
+  useEffect(
+    () => {
+      const now = new Date()
+      let filteredEvents = events.nodes.filter(event => event.date > now.toISOString())
+      // If there are no future events, still show the most recent one
+      if (!filteredEvents.length) filteredEvents.push(events.nodes[events.nodes.length - 1])
+      setFutureEvents(filteredEvents)
+    },
+    []
+  )
+
+  if (!page) return null
 
   return <EventsPageStyles>
     <Meta 
@@ -172,7 +186,7 @@ const EventsPage = ({data}) => {
     <PageHeader className="header">{page.name}</PageHeader>
 
     <div className="eventsWrapper">
-      {events.nodes.map(event => <Event key={event._id} className="event" event={event} /> )}      
+      {futureEvents.map(event => <Event key={event._id} className="event" event={event} /> )}      
     </div>
 
     <div className="linkWrapper">
@@ -198,7 +212,6 @@ const EventsPage = ({data}) => {
 }
 
 export default localize(EventsPage);
-
 export const query = graphql`
   query($pageId: String!) {
     page: sanityCustomPage(id: { eq: $pageId }) {

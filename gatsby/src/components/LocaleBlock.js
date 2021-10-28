@@ -54,7 +54,11 @@ export default function LocaleBlock({ content, className }) {
   console.log({content})
 
   // Blocks currently arrive without the markDefs field, so this needs to be added
-  const fixedContent = content.map((block) => ({ ...block, markDefs: [] }));
+  // const fixedContent = content.map((block) => ({
+  //   ...block,
+  //   markDefs: block.markDefs ? block.markDefs : [],
+  // }));
+  const fixedContent = content
   // Check for class name
   const blockClass = content[0].className || '';
 

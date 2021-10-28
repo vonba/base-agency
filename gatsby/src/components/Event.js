@@ -68,10 +68,18 @@ const serializers = {
 
 export default function Event({event, className}) {
 
-  // Blocks currently arrive without the markDefs field, so this needs to be added
-  const fixedEventBody = event.body.map((block) => ({ ...block, markDefs: [] }));
-  console.log(event.body)
-  console.log(fixedEventBody)
+  if (!event.body.map) {
+    console.log(event.body)
+    return null
+  }
+
+  // Some blocks currently arrive without the markDefs field, so this needs to be added
+  const fixedEventBody = event.body.map((block) => ({
+    ...block,
+    markDefs: block.markDefs ? block.markDefs : [],
+  }));
+
+  // TODO: still not getting markDefs from GraphQL
 
   return <EventStyles className={className}>
     <header>
