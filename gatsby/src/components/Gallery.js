@@ -180,8 +180,7 @@ export default function Gallery({
   return (
     <GalleryStyles className={expanded ? `${className} expanded` : className}>
       <Slider {...settings}>
-        {images.map((image,) => {
-          console.log(image)
+        {images.map((image) => {
           return <StyImage 
             key={image.asset._id}
             className="galleryImage"

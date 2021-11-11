@@ -15,7 +15,6 @@ const EventsPageStyles = styled.div`
   .intro {
     font-weight: 300;
     margin: 6rem 0 4rem 0;
-    /* text-align: justify; */
   }
 
   .socials {
@@ -76,7 +75,7 @@ const EventsPageStyles = styled.div`
   // Desktop
   @media (min-width: ${breakpoints.breakLg}) {
     padding-left: 38%;
-    padding-top: 10rem;
+    padding-top: 8rem;
     /* padding-top: calc(50vh - var(--navHeight) - 1rem); */
 
     .header {
@@ -114,7 +113,7 @@ const EventsPageStyles = styled.div`
           grid-column-start: 2;
 
           p {
-            text-align: right;
+            text-align: justify;
           }
         }
 
@@ -168,7 +167,7 @@ const EventsPage = ({data}) => {
       if (!filteredEvents.length) filteredEvents.push(events.nodes[events.nodes.length - 1])
       setFutureEvents(filteredEvents)
     },
-    []
+    [events.nodes]
   )
 
   if (!page) return null
@@ -247,9 +246,7 @@ export const query = graphql`
         }
         date
         time
-        body {
-          ...LocaleBlockFields
-        }
+        _rawBody
         image {
           ...ImageWithPreview
         }

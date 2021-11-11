@@ -60,7 +60,7 @@ const serializers = {
       // Read https://css-tricks.com/use-target_blank/
       const { blank, href } = mark
       return blank ?
-        <a href={href} target="_blank" rel="noopener">{children}</a>
+        <a href={href} target="_blank" rel="noreferrer">{children}</a>
         : <a href={href}>{children}</a>
     }
   }
@@ -68,13 +68,8 @@ const serializers = {
 
 export default function Event({event, className}) {
 
-  if (!event.body.map) {
-    console.log(event.body)
-    return null
-  }
-
   // Some blocks currently arrive without the markDefs field, so this needs to be added
-  const fixedEventBody = event.body.map((block) => ({
+  const fixedEventBody = event._rawBody.map((block) => ({
     ...block,
     markDefs: block.markDefs ? block.markDefs : [],
   }));
