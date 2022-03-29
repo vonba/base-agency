@@ -25,12 +25,13 @@ const ContactPageStyles = styled.div`
     @media (min-width: ${breakpoints.breakMd}) {
       margin-top: 4rem;
       display: grid;
-      grid-template-columns: 15em auto;
+      grid-template-columns: 26em auto;
       grid-gap: 4rem;
       
       .image {
-        width: 15em;
-        height: 15em;
+        // ratio 1:0.66
+        width: 26em;
+        height: 17.5em;
       }
 
       .text {
@@ -62,8 +63,9 @@ const ContactPage = ({data}) => {
         className="image"
         sanityImage={page.metaImage} 
         alt={page.name}
-        width={400}
-        height={500}
+        // Optional
+        // width={400}
+        // height={500}
       />}
 
       <div className="text">

@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 // import LocaleContext from '../components/LocaleContext.js';
+import BlockContent from '@sanity/block-content-to-react'
 import localize from'../components/localize.jsx';
 import Meta from '../components/Meta.js';
 import Project from '../components/Project.js';
@@ -10,6 +11,16 @@ import { breakpoints } from '../styles/Variables.js';
 
 const ProjectsPageStyles = styled.div`
   --gapValue: calc((100vw - 7rem) / 6 / 2);
+
+  .intro {
+    margin-bottom: 2em;
+    line-height: 1.5;
+    
+    @media (min-width: ${breakpoints.breakLg}) {
+      // Make this paragraph slightly narrower than main logo
+      width: calc(var(--col8) - 1em);
+    }
+  }
 
   .projectsWrapper {
     
@@ -121,6 +132,10 @@ const ProjectsPage = ({data}) => {
       title={page.metaname}
       description={page.metaDescription}
     />
+
+    <div className="intro">
+      <BlockContent blocks={page.body} />
+    </div>
     
     <PageHeader>{page.name}</PageHeader>
     
@@ -166,6 +181,9 @@ export const query = graphql`
       }
       metaImage {
         ...ImageWithPreview
+      }
+      body {
+        ...LocaleBlockFields
       }
     }
 

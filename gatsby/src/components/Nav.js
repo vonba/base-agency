@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { tr } from '../utils/translations';
@@ -94,19 +93,20 @@ const NavStyles = styled.nav`
         }
       }
 
-      &.whatsOn {
+      /* &.whatsOn {
+        text-align: right;
+      } */
+
+      &.pastProjects {
         text-align: right;
       }
 
       &.services {
-        text-align: left;
-      }
-
-      &.pastProjects {
         text-align: center;
       }
-
+      
       &.contact {
+        text-align: left;
         margin-bottom: 4rem;
       }
     }
@@ -248,7 +248,7 @@ const NavStyles = styled.nav`
 `;
 
 const Nav = ({className}) => {
-  const [locale, setLocale] = useContext(LocaleContext);
+  const [locale] = useContext(LocaleContext);
   const [expanded, setExpanded] = useState(false);
 
   const onNavigate = () => {
@@ -260,19 +260,19 @@ const Nav = ({className}) => {
       Base Agency
     </LocaleLink>
     <ul>
-      <li className="whatsOn">
+      {/* <li className="whatsOn">
         <LocaleLink to="/" onNavigate={onNavigate}>
           {tr('titles', 'whatsOn', locale)}
+        </LocaleLink>
+      </li> */}
+      <li className="pastProjects">
+        <LocaleLink to="/" onNavigate={onNavigate}>
+          {tr('titles', 'projects', locale)}
         </LocaleLink>
       </li>
       <li className="services">
         <LocaleLink to="/services" slugs={{es: 'servicios'}} onNavigate={onNavigate}>
           {tr('titles', 'services', locale)}
-        </LocaleLink>
-      </li>
-      <li className="pastProjects">
-        <LocaleLink to="/past-projects" slugs={{es: 'proyectos-pasados'}} onNavigate={onNavigate}>
-          {tr('titles', 'pastProjects', locale)}
         </LocaleLink>
       </li>
       <li className="contact">

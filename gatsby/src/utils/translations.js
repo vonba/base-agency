@@ -3,7 +3,7 @@ const defaultLocale = 'en';
 const strings = {
   titles: {
     services: { en: 'Services', es: 'Servicios' },
-    pastProjects: { en: 'Past Projects', es: 'Proyectos' },
+    projects: { en: 'Projects', es: 'Proyectos' },
     whatsOn: { en: "What's On", es: 'Eventos' },
     getInTouch: { en: 'Get In Touch', es: 'Contáctanos' },
   },
